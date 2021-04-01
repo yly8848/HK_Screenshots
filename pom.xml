@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.7.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.yly</groupId>
+	<artifactId>HK_Screenshots</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>HK_Screenshots</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- 图片缩略图 -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hk</groupId>       <!--自定义（随便填）-->
+			<artifactId>examples</artifactId>    <!--自定义（随便填，但需确保不重复）-->
+			<version>1.0</version>          <!--自定义（随便填）-->
+			<scope>system</scope>           <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+			<systemPath>${basedir}/src/main/resources/lib/examples.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+		</dependency>
+		<dependency>
+			<groupId>com.hk</groupId>       <!--自定义（随便填）-->
+			<artifactId>jna</artifactId>    <!--自定义（随便填，但需确保不重复）-->
+			<version>1.0</version>          <!--自定义（随便填）-->
+			<scope>system</scope>           <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+			<systemPath>${basedir}/src/main/resources/lib/jna.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib</outputDirectory>
+							<includeScope>system</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<finalName>hk</finalName>
+	</build>
+
+</project>
